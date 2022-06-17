@@ -10,7 +10,7 @@ app.use(express.json());
 // mapping the routes 
 
 //app.use('api/student/auth', require('./routes/student/auth'));
-//app.use('api/admin/auth', require('./routes/admin/auth'));
+app.use('/api/admin/auth', require('./routes/admin/auth'));
 //app.use('api/student/auth', require('./routes/student/auth'));
 
 app.use(errorHandler); // should be last peice of middleware
