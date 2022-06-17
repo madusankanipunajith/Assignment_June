@@ -11,6 +11,7 @@ app.use(express.json());
 
 //app.use('api/student/auth', require('./routes/student/auth'));
 app.use('/api/admin/auth', require('./routes/admin/auth'));
+app.use('/api/admin/private', require('./routes/admin/private'));
 //app.use('api/student/auth', require('./routes/student/auth'));
 
 app.use(errorHandler); // should be last peice of middleware

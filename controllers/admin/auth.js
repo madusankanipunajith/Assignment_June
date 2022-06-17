@@ -6,7 +6,7 @@ exports.register = async(req, res, next) => {
     const {name, password} = req.body;
     
     try {
-        const admin = await Admin.insertUser({name, password});
+        const admin = await Admin.insertUser({name, password, type: 1});
         return res.status(200).json({
             success: true,
             admin

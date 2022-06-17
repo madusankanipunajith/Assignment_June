@@ -6,7 +6,6 @@ function insertUser(newAdmin) {
     return new Promise((resolve, reject) => {
 
         const id = helper.getNewId(users)
-
         const date = { 
             createdAt: helper.newDate(),
             updatedAt: helper.newDate()
