@@ -1,6 +1,7 @@
 const fs = require('fs');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { resolve } = require('path');
 
 const getNewId = (array) => {
     if (array.length > 0) {
@@ -15,6 +16,19 @@ const newDate = () => new Date().toString()
 function mustBeInArray(array, id) {
     return new Promise((resolve, reject) => {
         const row = array.find(r => r.id == id)
+        if (!row) {
+            reject({
+                message: 'ID is not found',
+                status: 404
+            })
+        }
+        resolve(row)
+    })
+}
+
+function mustBeInUsers(array, name, password) {
+    return new Promise((resolve, reject) =>{
+        const row = array.find(r => (r.name === name && r.password === password))
         if (!row) {
             reject({
                 message: 'ID is not found',
@@ -42,5 +56,6 @@ module.exports = {
     newDate,
     mustBeInArray,
     writeJSONFile,
-    getToken
+    getToken,
+    mustBeInUsers
 }

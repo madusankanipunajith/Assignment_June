@@ -13,7 +13,6 @@ function insertUser(newAdmin) {
         } 
 
         const token = helper.getToken(id);
-        console.log(token);
 
         newAdmin = {...newAdmin,
                     id: id,
@@ -32,8 +31,23 @@ function findByID(id) {
     })
 }
 
+function findOne(name, password) {
+    return new Promise((resolve, reject) =>{
+        helper.mustBeInUsers(users, name, password).then(user => resolve(user)).catch(err => reject(err))
+    })
+}
+
+function genarateToken(id) {
+    return new Promise((resolve,reject)=>{
+        const token = helper.getToken(id);
+        resolve(token);
+    })
+}
+
 
 module.exports = {
     insertUser,
-    findByID
+    findByID,
+    findOne,
+    genarateToken
 }
