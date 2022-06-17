@@ -2,7 +2,7 @@ let users = require('../data/users.json');
 const filename = './data/users.json';
 const helper = require('../helpers/helper');
 
-function insertUser(newAdmin) {
+function insertUser(newUser) {
     return new Promise((resolve, reject) => {
 
         const id = helper.getNewId(users)
@@ -13,14 +13,13 @@ function insertUser(newAdmin) {
 
         const token = helper.getToken(id);
 
-        newAdmin = {...newAdmin,
+        newUser = {...newUser,
                     id: id,
-                    date: date,
-                    webtoken: token  }
+                    date: date }
 
-        users.push(newAdmin)
+        users.push(newUser)
         helper.writeJSONFile(filename, users)
-        resolve(newAdmin)
+        resolve(newUser).catch(err => reject(err))
     })
 }
 
@@ -39,7 +38,7 @@ function findOne(name, password) {
 function genarateToken(id) {
     return new Promise((resolve,reject)=>{
         const token = helper.getToken(id);
-        resolve(token);
+        resolve(token).catch(err => reject(err));
     })
 }
 
