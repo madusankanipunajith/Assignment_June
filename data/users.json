@@ -1,1 +1,1 @@
-[{"id":1,"createdAt":"Fri Jun 17 2022 20:10:28 GMT+0530 (India Standard Time)","updatedAt":"Fri Jun 17 2022 20:10:28 GMT+0530 (India Standard Time)","name":"Madusanka","password":1234}]
+[{"name":"Madusanka","password":1234,"id":1,"date":{"createdAt":"Fri Jun 17 2022 21:13:59 GMT+0530 (India Standard Time)","updatedAt":"Fri Jun 17 2022 21:13:59 GMT+0530 (India Standard Time)"},"webtoken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjU1NDgwNjM5LCJleHAiOjE2NTU0ODA3MjV9.soavLPSF7aqLF21LHopfzKYkccQbVzSg4iCvokivZrI"}]
