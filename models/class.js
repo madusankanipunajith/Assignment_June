@@ -7,8 +7,7 @@ function insertClass(newClassModule) {
 
         const id = helper.getNewId(classModule)
         const date = { 
-            createdAt: helper.newDate(),
-            updatedAt: helper.newDate()
+            createdAt: helper.newDate()
         }
 
         newClassModule = {...newClassModule,
