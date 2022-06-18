@@ -1,5 +1,4 @@
 const fs = require('fs');
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const getNewId = (array) => {
@@ -68,6 +67,20 @@ function mustBeInUsers(array, name, password) {
     })
 }
 
+function hasUser(array, name) {
+    return new Promise((resolve, reject) =>{
+        const row = array.find(r => (r.name === name))
+
+        if (!row) {
+            reject({
+                message: 'Name is not found',
+                status: 404
+            })
+        }
+        resolve(row)
+    })
+}
+
 function getToken(id) {
     return jwt.sign({ id: id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
 }
@@ -87,6 +100,10 @@ module.exports = {
     writeJSONFile,
     getToken,
     mustBeInUsers,
+<<<<<<< HEAD
     hasUser,
     mustNotBeInUsers
+=======
+    hasUser
+>>>>>>> 0ef004b499673c15ecf2afab0dd8f096aaa10745
 }
