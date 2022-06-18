@@ -17,20 +17,50 @@ function mustBeInArray(array, id) {
         if (!row) {
             reject({
                 message: 'ID is not found',
-                status: 404
+                statusCode: 404
             })
         }
         resolve(row)
     })
 }
 
+function hasUser(array, name) {
+    return new Promise((resolve, reject) => {
+        const row = array.find(r => (r.name === name))
+        if (!row) {
+            reject({
+                message: 'ID is not found',
+                statusCode: 404
+            })
+        }
+        else{
+            resolve(row);
+        }
+    })
+}
+
+function mustNotBeInUsers(array, name) {
+    return new Promise((resolve, reject) => {
+        const row = array.find(r => (r.name === name))
+        if (!row) {
+            resolve('resolved');
+        }
+        else{
+            reject({
+                statusCode: 404,
+                message: 'Duplicate User is found'
+            })
+        }
+    })
+}
+
 function mustBeInUsers(array, name, password) {
-    return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) => {
         const row = array.find(r => (r.name === name && r.password === password))
         if (!row) {
             reject({
                 message: 'ID is not found',
-                status: 404
+                statusCode: 404
             })
         }
         resolve(row)
@@ -103,7 +133,7 @@ function getExecuteModuleForStudents(array, classname, stuName) {
 }
 
 function getToken(id) {
-    return jwt.sign({id: id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRE});
+    return jwt.sign({ id: id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
 }
 
 function writeJSONFile(filename, content) {
@@ -121,6 +151,7 @@ module.exports = {
     writeJSONFile,
     getToken,
     mustBeInUsers,
+    mustNotBeInUsers,
     hasUser,
     hasModules,
     getStudentModules,
