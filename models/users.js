@@ -46,12 +46,6 @@ function findOne(name, password) {
     })
 }
 
-function findDuplicateUser(name) {
-    return new Promise((resolve, reject) =>{
-        helper.hasUser(users, name).then(user => resolve(user)).catch(err => reject(err))
-    })
-}
-
 function genarateToken(id) {
     return new Promise((resolve,reject)=>{
         const token = helper.getToken(id);

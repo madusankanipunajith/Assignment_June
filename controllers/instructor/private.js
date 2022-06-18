@@ -9,7 +9,7 @@ exports.insertClassModule = async (req, res, next) => {
         const { className, studentArray } = req.body;
         const moduleEnum = ModuleEnums[req.body.enum];
 
-        _ = await Student.findDuplicateUserFromArray(studentArray);
+        _ = await Instructor.findDuplicateUserFromArray(studentArray);
 
         _ = await Student.insertBulkUsers(studentArray);
 
