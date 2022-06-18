@@ -9,11 +9,12 @@ app.use(express.json());
 
 // mapping the routes 
 
-//app.use('api/student/auth', require('./routes/student/auth'));
 app.use('/api/admin/auth', require('./routes/admin/auth'));
 app.use('/api/admin/private', require('./routes/admin/private'));
 app.use('/api/instructor/auth', require('./routes/instructor/auth'));
 app.use('/api/instructor/private', require('./routes/instructor/private'));
+app.use('/api/student/auth', require('./routes/student/auth'));
+app.use('/api/student/private', require('./routes/student/private'));
 
 app.use(errorHandler); // should be last peice of middleware
 

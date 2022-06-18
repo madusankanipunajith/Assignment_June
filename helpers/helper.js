@@ -41,9 +41,44 @@ function hasUser(array, name) {
     return new Promise((resolve, reject) =>{
         const row = array.find(r => (r.name === name))
 
+        resolve(row)
+    })
+}
+
+function hasModules(array) {
+    return new Promise((resolve, reject) =>{
+        const row = array.map(r => r.moduleEnum)
         if (!row) {
             reject({
-                message: 'Name is not found',
+                message: 'Modules not found',
+                status: 404
+            })
+        }
+        resolve(row)
+    })
+}
+
+function getStudentModules(array, stuName) {
+    return new Promise((resolve, reject) =>{
+        const row = array.filter((item) => {
+            return (item.students.some(stu=>stu.name == stuName));
+        }).map(r => r.moduleEnum);
+        if (!row) {
+            reject({
+                message: 'Modules not found',
+                status: 404
+            })
+        }
+        resolve(row)
+    })
+}
+
+function getExecuteModule(array, classname) {
+    return new Promise((resolve, reject) =>{
+        const row = array.filter(r => r.className == classname)
+        if (!row) {
+            reject({
+                message: 'Modules not found',
                 status: 404
             })
         }
@@ -70,5 +105,8 @@ module.exports = {
     writeJSONFile,
     getToken,
     mustBeInUsers,
-    hasUser
+    hasUser,
+    hasModules,
+    getStudentModules,
+    getExecuteModule
 }
