@@ -35,6 +35,19 @@ function findByID(id) {
     })
 }
 
+function findDuplicateUser(name) {
+    return new Promise((resolve, reject) =>{
+        helper.hasUser(users, name).then(user => resolve(user)).catch(err => reject(err))
+    })
+}
+
+function findDuplicateUserFromArray(userArray) {
+    const promises = userArray.map(async (obj) =>{
+        return await helper.mustNotBeInUsers(users, obj.name);
+    })
+    return Promise.all(promises);
+}
+
 function findOne(name, password) {
     return new Promise((resolve, reject) =>{
         helper.mustBeInUsers(users, name, password).then(user => resolve(user)).catch(err => reject(err))
@@ -54,5 +67,7 @@ module.exports = {
     findByID,
     findOne,
     insertBulkUsers,
-    genarateToken
+    genarateToken,
+    findDuplicateUser,
+    findDuplicateUserFromArray
 }
