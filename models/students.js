@@ -35,7 +35,14 @@ function getStudentClassModules(stuName){
     })
 }
 
+function executeModuleForStudents(className, stuName){
+    return new Promise((resolve, reject) =>{
+        helper.getExecuteModuleForStudents(classModules, className, stuName).then(classModule => resolve(classModule)).catch(err => reject(err))
+    })
+}
+
 module.exports = {
     insertBulkStudents,
-    getStudentClassModules
+    getStudentClassModules,
+    executeModuleForStudents
 }

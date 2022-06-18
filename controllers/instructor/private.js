@@ -41,3 +41,20 @@ exports.getModules= async(req,res, next) =>{
         next(error);
     }
 }
+
+exports.getExecuteModules = async(req,res, next) =>{
+    try {
+
+        let className = req.params.className;
+
+        const modules = await Instructor.executeModule(className);
+
+        return res.status(200).json({
+            success: true,
+            message : 'Hello Module' + ' ' + modules[0].moduleEnum
+        })
+        
+    } catch (error) {
+        next(error);
+    }
+}

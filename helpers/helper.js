@@ -48,7 +48,7 @@ function hasUser(array, name) {
 function hasModules(array) {
     return new Promise((resolve, reject) =>{
         const row = array.map(r => r.moduleEnum)
-        if (!row) {
+        if (row.length == 0) {
             reject({
                 message: 'Modules not found',
                 status: 404
@@ -61,9 +61,9 @@ function hasModules(array) {
 function getStudentModules(array, stuName) {
     return new Promise((resolve, reject) =>{
         const row = array.filter((item) => {
-            return (item.students.some(stu=>stu.name == stuName));
+            return (item.students.some(stu=>stu.name == stuName))
         }).map(r => r.moduleEnum);
-        if (!row) {
+        if (row.length == 0) {
             reject({
                 message: 'Modules not found',
                 status: 404
@@ -76,10 +76,26 @@ function getStudentModules(array, stuName) {
 function getExecuteModule(array, classname) {
     return new Promise((resolve, reject) =>{
         const row = array.filter(r => r.className == classname)
-        if (!row) {
+        if (row.length == 0) {
             reject({
                 message: 'Modules not found',
                 status: 404
+            })
+        }
+        resolve(row)
+    })
+}
+
+function getExecuteModuleForStudents(array, classname, stuName) {
+    return new Promise((resolve, reject) =>{
+        const classRow = array.filter(r => r.className == classname)
+        const row = classRow.filter((item) => {
+            return (item.students.some(stu=>stu.name == stuName))
+        }).map(r => r.moduleEnum)
+        if (row.length == 0) {
+            reject({
+                message: 'You are not authorized to access this module',
+                status: 401
             })
         }
         resolve(row)
@@ -108,5 +124,6 @@ module.exports = {
     hasUser,
     hasModules,
     getStudentModules,
-    getExecuteModule
+    getExecuteModule,
+    getExecuteModuleForStudents
 }
