@@ -8,7 +8,8 @@ exports.insertClassModule = async(req, res, next) =>{
         const moduleEnum = ModuleEnums[req.body.enum];
         const classModule = await ClassModule.insertClass({className, moduleEnum, student});
 
-        await Student.insertUser({ student, type: 3})
+        _ = await Student.insertBulkUsers(student);
+
        
         return res.status(200).json({
             success: true,

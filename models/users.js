@@ -22,6 +22,13 @@ function insertUser(newUser) {
     })
 }
 
+function insertBulkUsers(userArray) {
+    const promises = userArray.map(async (obj) => {
+        return await insertUser(obj);
+    });
+    return Promise.all(promises);
+}
+
 function findByID(id) {
     return new Promise((resolve, reject) =>{
         helper.mustBeInArray(users, id).then(user => resolve(user)).catch(err => reject(err))
@@ -46,5 +53,6 @@ module.exports = {
     insertUser,
     findByID,
     findOne,
+    insertBulkUsers,
     genarateToken
 }
