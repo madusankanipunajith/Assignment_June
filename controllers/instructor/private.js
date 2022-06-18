@@ -1,11 +1,12 @@
 const ClassModule = require("../../models/class");
-const enums = require("../../utils/enums");
+const ModuleEnums = require("../../utils/enums");
 
 exports.insertClassModule = async(req, res, next) =>{
     try {
-        const {module_enum} = req.body;
-        const student = req.body;
-        const classModule = await ClassModule.insertClass({module_enum, student});
+        const {className} = ModuleEnums.req.body.className;
+        const moduleEnum = ModuleEnums.req.body.enum;
+        const {student} = req.body.student;
+        const classModule = await ClassModule.insertClass({className, moduleEnum, student});
         
         return res.status(200).json({
             success: true,
