@@ -7,8 +7,7 @@ function insertUser(newUser) {
 
         const id = helper.getNewId(users)
         const date = { 
-            createdAt: helper.newDate(),
-            updatedAt: helper.newDate()
+            createdAt: helper.newDate()
         } 
 
         const token = helper.getToken(id);

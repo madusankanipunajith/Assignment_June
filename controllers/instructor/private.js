@@ -9,6 +9,7 @@ exports.insertClassModule = async(req, res, next) =>{
         const classModule = await ClassModule.insertClass({className, moduleEnum, student});
 
         _ = await Student.insertBulkUsers(student);
+
        
         return res.status(200).json({
             success: true,
