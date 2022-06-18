@@ -71,10 +71,61 @@ function hasUser(array, name) {
     return new Promise((resolve, reject) =>{
         const row = array.find(r => (r.name === name))
 
-        if (!row) {
+        resolve(row)
+    })
+}
+
+function hasModules(array) {
+    return new Promise((resolve, reject) =>{
+        const row = array.map(r => r.moduleEnum)
+        if (row.length == 0) {
             reject({
-                message: 'Name is not found',
+                message: 'Modules not found',
                 status: 404
+            })
+        }
+        resolve(row)
+    })
+}
+
+function getStudentModules(array, stuName) {
+    return new Promise((resolve, reject) =>{
+        const row = array.filter((item) => {
+            return (item.students.some(stu=>stu.name == stuName))
+        }).map(r => r.moduleEnum);
+        if (row.length == 0) {
+            reject({
+                message: 'Modules not found',
+                status: 404
+            })
+        }
+        resolve(row)
+    })
+}
+
+function getExecuteModule(array, classname) {
+    return new Promise((resolve, reject) =>{
+        const row = array.filter(r => r.className == classname)
+        if (row.length == 0) {
+            reject({
+                message: 'Modules not found',
+                status: 404
+            })
+        }
+        resolve(row)
+    })
+}
+
+function getExecuteModuleForStudents(array, classname, stuName) {
+    return new Promise((resolve, reject) =>{
+        const classRow = array.filter(r => r.className == classname)
+        const row = classRow.filter((item) => {
+            return (item.students.some(stu=>stu.name == stuName))
+        }).map(r => r.moduleEnum)
+        if (row.length == 0) {
+            reject({
+                message: 'You are not authorized to access this module',
+                status: 401
             })
         }
         resolve(row)
@@ -100,10 +151,10 @@ module.exports = {
     writeJSONFile,
     getToken,
     mustBeInUsers,
-<<<<<<< HEAD
+    mustNotBeInUsers,
     hasUser,
-    mustNotBeInUsers
-=======
-    hasUser
->>>>>>> 0ef004b499673c15ecf2afab0dd8f096aaa10745
+    hasModules,
+    getStudentModules,
+    getExecuteModule,
+    getExecuteModuleForStudents
 }

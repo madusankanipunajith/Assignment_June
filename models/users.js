@@ -1,4 +1,5 @@
 let users = require('../data/users.json');
+let classModules = require('../data/class.json');
 const filename = './data/users.json';
 const helper = require('../helpers/helper');
 
@@ -58,17 +59,27 @@ function genarateToken(id) {
     })
 }
 
+function getClassModules(){
+    return new Promise((resolve, reject) =>{
+        helper.hasModules(classModules).then(classModule => resolve(classModule)).catch(err => reject(err))
+    })
+}
+
+function executeModule(className){
+    return new Promise((resolve, reject) =>{
+        helper.getExecuteModule(classModules, className).then(classModule => resolve(classModule)).catch(err => reject(err))
+    })
+}
+
 module.exports = {
     insertUser,
     findByID,
     findOne,
-<<<<<<< HEAD
     insertBulkUsers,
     genarateToken,
     findDuplicateUser,
-    findDuplicateUserFromArray
-=======
-    genarateToken,
-    findDuplicateUser
->>>>>>> 0ef004b499673c15ecf2afab0dd8f096aaa10745
+    findDuplicateUserFromArray,
+    findDuplicateUser,
+    getClassModules,
+    executeModule
 }

@@ -1,4 +1,5 @@
 let users = require('../data/users.json');
+let classModules = require('../data/class.json');
 const filename = './data/users.json';
 const helper = require('../helpers/helper');
 
@@ -28,13 +29,20 @@ function insertBulkStudents(userArray) {
     return Promise.all(promises);
 }
 
-function findDuplicateStudent(name) {
+function getStudentClassModules(stuName){
     return new Promise((resolve, reject) =>{
-        helper.hasUser(users, name).then(user => resolve(user)).catch(err => reject(err))
+        helper.getStudentModules(classModules, stuName).then(classModule => resolve(classModule)).catch(err => reject(err))
+    })
+}
+
+function executeModuleForStudents(className, stuName){
+    return new Promise((resolve, reject) =>{
+        helper.getExecuteModuleForStudents(classModules, className, stuName).then(classModule => resolve(classModule)).catch(err => reject(err))
     })
 }
 
 module.exports = {
     insertBulkStudents,
-    findDuplicateStudent
+    getStudentClassModules,
+    executeModuleForStudents
 }
