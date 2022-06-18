@@ -10,7 +10,7 @@ exports.protect = async (req, res, next) =>{
     }
 
     if(!token){
-        return next(new ErrorResponse("Not authorized to access this route for Admin", 401));
+        return next(new ErrorResponse("Not authorized to access this route for Student", 401));
     }
 
     try {
@@ -18,19 +18,19 @@ exports.protect = async (req, res, next) =>{
         const user = await User.findByID(decode.id);
 
         if (!user) {
-            return next(new ErrorResponse("No Admin was found with this id", 404));
+            return next(new ErrorResponse("No Student was found with this id", 404));
         }
 
         req.user = user;
-        if (user.type === 1) {
+        if (user.type === 3) {
             next();
         }else{
-            next(new ErrorResponse("Invalid token for the Admin", 401));
+            next(new ErrorResponse("Invalid token for the Student", 401));
         }
             
 
     } catch (error) {
-        next(new ErrorResponse("Not authorized to access this routes for Admin", 401));
+        next(new ErrorResponse("Not authorized to access this routes for Student", 401));
     }
 
 }
