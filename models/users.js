@@ -45,7 +45,6 @@ function genarateToken(id) {
     })
 }
 
-
 module.exports = {
     insertUser,
     findByID,

@@ -40,6 +40,7 @@ function mustBeInUsers(array, name, password) {
 function hasUser(array, name) {
     return new Promise((resolve, reject) =>{
         const row = array.find(r => (r.name === name))
+
         if (!row) {
             reject({
                 message: 'Name is not found',

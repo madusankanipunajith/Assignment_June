@@ -28,6 +28,13 @@ function insertBulkStudents(userArray) {
     return Promise.all(promises);
 }
 
+function findDuplicateStudent(name) {
+    return new Promise((resolve, reject) =>{
+        helper.hasUser(users, name).then(user => resolve(user)).catch(err => reject(err))
+    })
+}
+
 module.exports = {
-    insertBulkStudents
+    insertBulkStudents,
+    findDuplicateStudent
 }
