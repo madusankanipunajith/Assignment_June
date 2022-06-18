@@ -24,21 +24,6 @@ function mustBeInArray(array, id) {
     })
 }
 
-function hasUser(array, name) {
-    return new Promise((resolve, reject) => {
-        const row = array.find(r => (r.name === name))
-        if (!row) {
-            reject({
-                message: 'ID is not found',
-                statusCode: 404
-            })
-        }
-        else{
-            resolve(row);
-        }
-    })
-}
-
 function mustNotBeInUsers(array, name) {
     return new Promise((resolve, reject) => {
         const row = array.find(r => (r.name === name))
@@ -144,7 +129,6 @@ module.exports = {
     getToken,
     mustBeInUsers,
     mustNotBeInUsers,
-    hasUser,
     hasModules,
     getStudentModules,
     getExecuteModule,

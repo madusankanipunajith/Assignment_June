@@ -29,7 +29,7 @@ function findByID(id) {
 
 function findDuplicateUser(name) {
     return new Promise((resolve, reject) =>{
-        helper.hasUser(users, name).then(user => resolve(user)).catch(err => reject(err))
+        helper.mustNotBeInUsers(users, name).then(user => resolve(user)).catch(err => reject(err))
     })
 }
 
