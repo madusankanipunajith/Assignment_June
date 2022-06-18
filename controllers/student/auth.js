@@ -1,4 +1,4 @@
-const Instructor = require("../../models/users");
+const Student = require("../../models/users");
 const ErrorResponse = require("../../utils/errorResponse");
 
 exports.login = async(req, res, next) => {
@@ -9,14 +9,14 @@ exports.login = async(req, res, next) => {
     }
 
     try {
-        const instructor = await Instructor.findOne(name, password);
-        if (!instructor) {
+        const student = await Student.findOne(name, password);
+        if (!student) {
             return next(new ErrorResponse("Invalid credintials", 401)); 
         }
-        const token = await Instructor.genarateToken(instructor.id);
+        const token = await Student.genarateToken(student.id);
         return res.status(200).json({
             success: true,
-            instructor,
+            student,
             jwtToken: token
         })
     } catch (error) {

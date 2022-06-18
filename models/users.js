@@ -10,8 +10,6 @@ function insertUser(newUser) {
             createdAt: helper.newDate()
         } 
 
-        const token = helper.getToken(id);
-
         newUser = {...newUser,
                     id: id,
                     date: date }
@@ -20,13 +18,6 @@ function insertUser(newUser) {
         helper.writeJSONFile(filename, users)
         resolve(newUser).catch(err => reject(err))
     })
-}
-
-function insertBulkUsers(userArray) {
-    const promises = userArray.map(async (obj) => {
-        return await insertUser(obj);
-    });
-    return Promise.all(promises);
 }
 
 function findByID(id) {
@@ -38,6 +29,12 @@ function findByID(id) {
 function findOne(name, password) {
     return new Promise((resolve, reject) =>{
         helper.mustBeInUsers(users, name, password).then(user => resolve(user)).catch(err => reject(err))
+    })
+}
+
+function findDuplicateUser(name) {
+    return new Promise((resolve, reject) =>{
+        helper.hasUser(users, name).then(user => resolve(user)).catch(err => reject(err))
     })
 }
 
@@ -53,6 +50,6 @@ module.exports = {
     insertUser,
     findByID,
     findOne,
-    insertBulkUsers,
-    genarateToken
+    genarateToken,
+    findDuplicateUser
 }
